@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        env:
+        - name: PMA_HOST
+          value: "rc1a-rn2b31idcn0rhf6h.mdb.yandexcloud.net"
+        - name: PMA_USER
+          value: "netology_user"
+        - name: PMA_PASSWORD
+          value: "MyStr0ngP@ssw0rd123"
+        - name: PMA_SSL
+          value: "off"
+        - name: PMA_SSL_VERIFY
+          value: "off"
+        ports:
+        - containerPort: 80
